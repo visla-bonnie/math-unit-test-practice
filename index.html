@@ -481,30 +481,174 @@
       ['Explain Reasoning', 'Use sentence starters like: I lined up the decimals...']
     ];
 
-    const quiz = [
-      { type:'mc', lesson:'L13', question:'Mai has $14.50. She spends $4.35 and $5.25. How much is left?', options:['$4.90','$5.90','$9.60','$10.60'], answer:'$4.90', explain:'$4.35 + $5.25 = $9.60, then $14.50 - $9.60 = $4.90' },
-      { type:'mc', lesson:'L14', question:'0.08 + 0.13 = ?', options:['0.21','0.31','0.20','0.11'], answer:'0.21', explain:'8 hundredths + 13 hundredths = 21 hundredths = 0.21' },
-      { type:'mc', lesson:'L14', question:'0.23 - 0.07 = ?', options:['0.14','0.16','0.17','0.06'], answer:'0.16', explain:'23 hundredths - 7 hundredths = 16 hundredths' },
-      { type:'mc', lesson:'L17', question:'2.5 × 1.4 = ?', options:['3.5','35','0.35','2.9'], answer:'3.5', explain:'25 × 14 = 350, then place 2 decimal digits total' },
-      { type:'mc', lesson:'L17', question:'0.54 × 3.8 = ?', options:['2.052','20.52','0.2052','1.62'], answer:'2.052', explain:'54 × 38 = 2052, then place 3 decimal digits' },
-      { type:'mc', lesson:'L19', question:'86 ÷ 4 = ?', options:['21.4','21.5','22','20.5'], answer:'21.5', explain:'84 ÷ 4 = 21 with 2 left. 2 ones = 20 tenths, and 20 tenths ÷ 4 = 5 tenths' },
-      { type:'mc', lesson:'L20', question:'13.25 ÷ 0.4 = ?', options:['3.3125','33.125','331.25','13.21'], answer:'33.125', explain:'Make the divisor whole: 132.5 ÷ 4 = 33.125' },
-      { type:'mc', lesson:'L20', question:'61.12 ÷ 3.2 = ?', options:['19.1','1.91','191','9.1'], answer:'19.1', explain:'Multiply both numbers by 10: 611.2 ÷ 32 = 19.1' },
-      { type:'mc', lesson:'L21', question:'A ribbon is 12 m long. Diego cuts 9 pieces of 0.4 m. How much ribbon is left?', options:['8.4 m','7.6 m','3.6 m','14 m'], answer:'8.4 m', explain:'9 × 0.4 = 3.6. Then 12 - 3.6 = 8.4' },
-      { type:'mc', lesson:'L21', question:'A school has 460 walkers. Public transit is 20% of walkers. How many students take public transit?', options:['46','82','92','102'], answer:'92', explain:'20% = 0.2, and 0.2 × 460 = 92' },
-      { type:'input', lesson:'L11', question:'Volume of a rectangular prism with length 24, width 15, and height 4/3', answer:'480', explain:'24 × 15 × 4/3 = 32 × 15 = 480' },
-      { type:'input', lesson:'L10', question:'Area of a triangle with base 8 and height 5', answer:'20', explain:'1/2 × 8 × 5 = 20' }
-    ];
+    function buildQuestionPool() {
+      const pool = [];
 
-    let currentTab = 'home';
-    let currentLesson = 0;
-    let quizIndex = 0;
-    let selected = '';
-    let textAnswer = '';
-    let score = 0;
-    let answered = 0;
-    let wrongQuestions = [];
-    let showResult = false;
+      function money(n) {
+        return '$' + Number(n).toFixed(2);
+      }
+
+      function addMoneyQuestion() {
+        const startOptions = [12.5, 14.5, 18.75, 20, 25, 30];
+        const spend1Options = [4.35, 5.25, 3.75, 6.4, 2.85, 1.85];
+        const spend2Options = [5.25, 1.85, 4.25, 2.49, 3.15, 5.5];
+        const start = startOptions[Math.floor(Math.random() * startOptions.length)];
+        const s1 = spend1Options[Math.floor(Math.random() * spend1Options.length)];
+        const s2 = spend2Options[Math.floor(Math.random() * spend2Options.length)];
+        const answer = (start - s1 - s2).toFixed(2);
+        return {
+          type:'input',
+          lesson:'L13',
+          question:`Mai has ${money(start)}. She spends ${money(s1)} and ${money(s2)}. How much is left?`,
+          answer,
+          explain:`First add the spending: ${money(s1)} + ${money(s2)} = ${money(s1 + s2)}. Then subtract from ${money(start)} to get ${money(Number(answer))}.`
+        };
+      }
+
+      function buyWholeItemsQuestion() {
+        const priceOptions = [7.5, 6.25, 3.25, 1.85, 0.99];
+        const budgetOptions = [10, 18, 25, 40];
+        const price = priceOptions[Math.floor(Math.random() * priceOptions.length)];
+        const budget = budgetOptions[Math.floor(Math.random() * budgetOptions.length)];
+        const exact = budget / price;
+        const answer = String(Math.floor(exact));
+        return {
+          type:'input',
+          lesson:'L13',
+          question:`An item costs ${money(price)}. You have ${money(budget)}. How many whole items can you buy?`,
+          answer,
+          explain:`${budget} ÷ ${price} = ${exact.toFixed(2)}..., but you can only buy whole items, so the answer is ${answer}.`
+        };
+      }
+
+      function addSubtractDecimalQuestion() {
+        const ops = [
+          { a: 0.08, b: 0.13, op: '+', ans: '0.21', why: '8 hundredths + 13 hundredths = 21 hundredths = 0.21' },
+          { a: 0.23, b: 0.07, op: '-', ans: '0.16', why: '23 hundredths - 7 hundredths = 16 hundredths' },
+          { a: 7.4, b: 0.0022, op: '-', ans: '7.3978', why: 'Write 7.4 as 7.4000, then subtract 0.0022.' },
+          { a: 3.572, b: 2.6014, op: '-', ans: '0.9706', why: 'Line up the decimals and subtract by place value.' },
+          { a: 1.0, b: 0.162, op: '-', ans: '0.838', why: 'Write 1 as 1.000 and subtract 0.162.' }
+        ];
+        const q = ops[Math.floor(Math.random() * ops.length)];
+        return {
+          type:'input',
+          lesson:'L14',
+          question:`Find the value: ${q.a} ${q.op} ${q.b}`,
+          answer:q.ans,
+          explain:q.why
+        };
+      }
+
+      function multiplyDecimalQuestion() {
+        const pairs = [
+          { a: 2.5, b: 1.4, ans: '3.5' },
+          { a: 0.54, b: 3.8, ans: '2.052' },
+          { a: 5.4, b: 2.4, ans: '12.96' },
+          { a: 1.67, b: 3.5, ans: '5.845' },
+          { a: 3.1, b: 1.5, ans: '4.65' }
+        ];
+        const q = pairs[Math.floor(Math.random() * pairs.length)];
+        return {
+          type:'input',
+          lesson:'L17',
+          question:`Find the product: ${q.a} × ${q.b}`,
+          answer:q.ans,
+          explain:`Multiply like whole numbers first, then place the decimal correctly. The product is ${q.ans}.`
+        };
+      }
+
+      function divisionQuestion() {
+        const pairs = [
+          { lesson:'L19', q: '86 ÷ 4', ans: '21.5', why: '84 ÷ 4 = 21 with 2 left. The 2 ones become 20 tenths, and 20 tenths ÷ 4 = 5 tenths.' },
+          { lesson:'L19', q: '109.2 ÷ 6', ans: '18.2', why: '108 ÷ 6 = 18 and 1.2 ÷ 6 = 0.2.' },
+          { lesson:'L20', q: '13.25 ÷ 0.4', ans: '33.125', why: 'Make the divisor whole: 132.5 ÷ 4 = 33.125.' },
+          { lesson:'L20', q: '61.12 ÷ 3.2', ans: '19.1', why: 'Multiply both numbers by 10: 611.2 ÷ 32 = 19.1.' },
+          { lesson:'L20', q: '24.2 ÷ 1.1', ans: '22', why: 'Multiply both numbers by 10: 242 ÷ 11 = 22.' }
+        ];
+        const q = pairs[Math.floor(Math.random() * pairs.length)];
+        return {
+          type:'input',
+          lesson:q.lesson,
+          question:`Find the quotient: ${q.q}`,
+          answer:q.ans,
+          explain:q.why
+        };
+      }
+
+      function wordProblemQuestion() {
+        const qs = [
+          {
+            lesson:'L21',
+            question:'A ribbon is 12 meters long. Diego cuts 9 pieces of 0.4 meter. How much ribbon is left?',
+            answer:'8.4',
+            explain:'9 × 0.4 = 3.6. Then 12 - 3.6 = 8.4.'
+          },
+          {
+            lesson:'L21',
+            question:'If each wreath uses 0.6 meter of ribbon, how many wreaths can be made from 8.4 meters?',
+            answer:'14',
+            explain:'8.4 ÷ 0.6 = 14.'
+          },
+          {
+            lesson:'L21',
+            question:'At a school, 460 students walk. Public transit is 20% of that number. How many students take public transit?',
+            answer:'92',
+            explain:'20% = 0.2, and 0.2 × 460 = 92.'
+          },
+          {
+            lesson:'L21',
+            question:'The school bus group is 110% of 460 walkers. How many students ride the school bus?',
+            answer:'506',
+            explain:'110% = 1.10, and 1.10 × 460 = 506.'
+          }
+        ];
+        return qs[Math.floor(Math.random() * qs.length)];
+      }
+
+      function geometryQuestion() {
+        const qs = [
+          {
+            type:'input',
+            lesson:'L11',
+            question:'Volume of a rectangular prism with length 24, width 15, and height 4/3',
+            answer:'480',
+            explain:'24 × 15 × 4/3 = 32 × 15 = 480.'
+          },
+          {
+            type:'input',
+            lesson:'L10',
+            question:'Area of a triangle with base 8 and height 5',
+            answer:'20',
+            explain:'1/2 × 8 × 5 = 20.'
+          },
+          {
+            type:'input',
+            lesson:'L10',
+            question:'Area of a right triangle with base 5/4 and height 6/5',
+            answer:'0.75',
+            explain:'1/2 × 5/4 × 6/5 = 3/4 = 0.75.'
+          }
+        ];
+        return qs[Math.floor(Math.random() * qs.length)];
+      }
+
+      pool.push(addMoneyQuestion());
+      pool.push(buyWholeItemsQuestion());
+      pool.push(addSubtractDecimalQuestion());
+      pool.push(addSubtractDecimalQuestion());
+      pool.push(multiplyDecimalQuestion());
+      pool.push(multiplyDecimalQuestion());
+      pool.push(divisionQuestion());
+      pool.push(divisionQuestion());
+      pool.push(wordProblemQuestion());
+      pool.push(geometryQuestion());
+      pool.push(wordProblemQuestion());
+      pool.push(geometryQuestion());
+
+      return pool.sort(() => Math.random() - 0.5);
+    }
+
+    let quiz = buildQuestionPool();
 
     function normalize(v) {
       return String(v).trim().replace(/\$/g, '').replace(/\s+/g, '').toLowerCase();
@@ -632,6 +776,7 @@
     }
 
     function restartQuiz() {
+      quiz = buildQuestionPool();
       quizIndex = 0;
       score = 0;
       answered = 0;
