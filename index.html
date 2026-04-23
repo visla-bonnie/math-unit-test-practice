@@ -6,48 +6,33 @@
   <title>Audrey's Math Mission</title>
   <style>
     :root {
-      --bg: #f7f8ff;
+      --bg: #f5f7ff;
       --card: #ffffff;
       --ink: #1f2937;
-      --muted: #64748b;
-      --primary: #4f46e5;
-      --primary-2: #7c3aed;
-      --good: #059669;
-      --bad: #dc2626;
-      --soft: #eef2ff;
       --line: #e5e7eb;
-      --gold: #fbbf24;
+      --primary: #243145;
+      --good: #065f46;
+      --goodbg: #ecfdf5;
+      --bad: #991b1b;
+      --badbg: #fef2f2;
     }
-
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #f8fbff 0%, #f7f8ff 100%);
+      background: linear-gradient(180deg, #f8fbff 0%, #f5f7ff 100%);
       color: var(--ink);
     }
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+    .container { max-width: 1160px; margin: 0 auto; padding: 20px; }
     .hero {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed 55%, #f59e0b);
+      background: linear-gradient(135deg, #5848ee, #8b5cf6 58%, #f59e0b);
       color: white;
       border-radius: 28px;
       padding: 28px;
-      box-shadow: 0 12px 30px rgba(79,70,229,.18);
+      box-shadow: 0 16px 35px rgba(91,77,240,.22);
     }
-    .hero h1 {
-      margin: 0;
-      font-size: 42px;
-    }
-    .hero p {
-      margin-top: 10px;
-      font-size: 18px;
-      line-height: 1.5;
-      max-width: 760px;
-    }
+    .hero h1 { margin: 0; font-size: 40px; }
+    .hero p { margin: 10px 0 0; max-width: 760px; line-height: 1.5; font-size: 18px; }
     .stats {
       margin-top: 18px;
       display: grid;
@@ -55,28 +40,14 @@
       gap: 12px;
     }
     .stat {
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2);
       border-radius: 18px;
       padding: 14px;
     }
-    .stat .label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      opacity: .9;
-    }
-    .stat .value {
-      font-size: 28px;
-      font-weight: 700;
-      margin-top: 6px;
-    }
-    .tabs {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
+    .stat .label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+    .stat .value { font-size: 28px; font-weight: 700; margin-top: 6px; }
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
     .tab-btn, button {
       border: none;
       cursor: pointer;
@@ -84,25 +55,12 @@
       padding: 12px 16px;
       font-weight: 700;
       transition: .18s ease;
+      font-size: 16px;
     }
-    .tab-btn {
-      background: white;
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-    .tab-btn.active {
-      background: var(--ink);
-      color: white;
-      border-color: var(--ink);
-    }
-    .grid {
-      display: grid;
-      gap: 18px;
-      margin-top: 22px;
-    }
-    .grid-home {
-      grid-template-columns: 2fr 1fr;
-    }
+    .tab-btn { background: white; border: 1px solid var(--line); color: var(--ink); }
+    .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .grid { display: grid; gap: 18px; margin-top: 22px; }
+    .grid-home { grid-template-columns: 2fr 1fr; }
     .card {
       background: var(--card);
       border: 1px solid var(--line);
@@ -110,185 +68,43 @@
       padding: 22px;
       box-shadow: 0 6px 18px rgba(15,23,42,.05);
     }
-    .card h2, .card h3 {
-      margin-top: 0;
-    }
-    .plan-grid, .cheat-grid {
-      display: grid;
-      gap: 14px;
-    }
-    .plan-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+    .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .mini-card {
       background: #f8fafc;
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 16px;
     }
-    .lesson-layout {
-      display: grid;
-      grid-template-columns: 290px 1fr;
-      gap: 18px;
-    }
+    .lesson-layout { display: grid; grid-template-columns: 290px 1fr; gap: 18px; }
     .lesson-btn {
-      width: 100%;
-      text-align: left;
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      margin-bottom: 10px;
-      color: var(--ink);
+      width: 100%; text-align: left; background: #f8fafc; border: 1px solid var(--line); margin-bottom: 10px; color: var(--ink);
     }
-    .lesson-btn.active {
-      background: var(--ink);
-      color: white;
-      border-color: var(--ink);
-    }
-    .lesson-panel {
-      background: linear-gradient(135deg, #fff, #f8fbff);
-    }
+    .lesson-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
     .badge {
-      display: inline-block;
-      background: var(--soft);
-      color: var(--primary);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 13px;
+      display: inline-block; background: #eef2ff; color: #4f46e5; padding: 8px 12px; border-radius: 999px; font-weight: 700; font-size: 13px;
     }
-    .examples {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 16px;
-    }
-    .example {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 16px;
-    }
-    .quiz-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .progress {
-      width: 320px;
-      max-width: 100%;
-      height: 12px;
-      background: #e5e7eb;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .progress > div {
-      height: 100%;
-      background: linear-gradient(90deg, #4f46e5, #f59e0b);
-      width: 0%;
-      transition: width .25s ease;
-    }
-    .question-box {
-      margin-top: 18px;
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 22px;
-    }
-    .question {
-      font-size: 26px;
-      line-height: 1.45;
-      font-weight: 700;
-    }
-    .choices {
-      margin-top: 16px;
-      display: grid;
-      gap: 10px;
-    }
-    .choice {
-      text-align: left;
-      background: white;
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-    .choice.selected {
-      background: var(--ink);
-      color: white;
-      border-color: var(--ink);
-    }
-    .choice.correct {
-      background: #ecfdf5;
-      color: #065f46;
-      border-color: #6ee7b7;
-    }
-    .choice.wrong {
-      background: #fef2f2;
-      color: #991b1b;
-      border-color: #fca5a5;
-    }
-    .input {
-      width: 100%;
-      margin-top: 16px;
-      border-radius: 18px;
-      border: 1px solid #cbd5e1;
-      padding: 14px 16px;
-      font-size: 18px;
-    }
-    .actions {
-      margin-top: 18px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .primary {
-      background: var(--ink);
-      color: white;
-    }
-    .secondary {
-      background: white;
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-    .feedback {
-      margin-top: 16px;
-      border-radius: 18px;
-      padding: 16px;
-      display: none;
-      line-height: 1.55;
-      border: 1px solid var(--line);
-    }
+    .examples { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .example { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 16px; }
+    .quiz-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .progress { width: 320px; max-width: 100%; height: 12px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
+    .progress > div { height: 100%; background: linear-gradient(90deg, #5848ee, #f59e0b); width: 0%; transition: width .25s ease; }
+    .question-box { margin-top: 18px; background: #f8fafc; border: 1px solid var(--line); border-radius: 24px; padding: 22px; }
+    .question { font-size: 26px; line-height: 1.45; font-weight: 700; min-height: 72px; white-space: pre-line; }
+    .input { width: 100%; margin-top: 16px; border-radius: 18px; border: 1px solid #cbd5e1; padding: 14px 16px; font-size: 18px; }
+    .actions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .primary { background: var(--primary); color: white; }
+    .secondary { background: white; border: 1px solid var(--line); color: var(--ink); }
+    .feedback { margin-top: 16px; border-radius: 18px; padding: 16px; display: none; line-height: 1.55; border: 1px solid var(--line); }
     .feedback.show { display: block; }
-    .feedback.good { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
-    .feedback.bad { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
-    .cheat-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .result-grid {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 18px;
-    }
-    .result-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-    .review-item {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      border-radius: 18px;
-      padding: 16px;
-      margin-top: 12px;
-    }
+    .feedback.good { background: var(--goodbg); color: var(--good); border-color: #a7f3d0; }
+    .feedback.bad { background: var(--badbg); color: var(--bad); border-color: #fecaca; }
+    .cheat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .result-grid { display: grid; grid-template-columns: 1fr 320px; gap: 18px; }
+    .result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .review-item { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 18px; padding: 16px; margin-top: 12px; }
     .hidden { display: none !important; }
-
     @media (max-width: 900px) {
-      .stats, .plan-grid, .examples, .cheat-grid, .result-stats,
-      .grid-home, .lesson-layout, .result-grid {
-        grid-template-columns: 1fr;
-      }
+      .stats, .plan-grid, .examples, .cheat-grid, .result-stats, .grid-home, .lesson-layout, .result-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 32px; }
       .question { font-size: 22px; }
     }
@@ -298,9 +114,9 @@
   <div class="container">
     <div class="hero">
       <h1>Audrey’s Math Mission 🚀</h1>
-      <p>Review decimals, money, area, volume, multiplication, and division before the unit test. This app is built from the exact workbook topics you showed.</p>
+      <p>Review decimals, money, area, volume, multiplication, and division before the unit test. This version makes a fresh mixed quiz each time you restart.</p>
       <div class="stats">
-        <div class="stat"><div class="label">Lessons</div><div class="value" id="statLessons">6</div></div>
+        <div class="stat"><div class="label">Lessons</div><div class="value">6</div></div>
         <div class="stat"><div class="label">Quiz Score</div><div class="value" id="statScore">0/0</div></div>
         <div class="stat"><div class="label">Accuracy</div><div class="value" id="statAccuracy">0%</div></div>
         <div class="stat"><div class="label">Mode</div><div class="value">HTML</div></div>
@@ -339,7 +155,7 @@
     <section id="review" class="grid hidden">
       <div class="lesson-layout">
         <div class="card" id="lessonButtons"></div>
-        <div class="card lesson-panel" id="lessonPanel"></div>
+        <div class="card" id="lessonPanel"></div>
       </div>
     </section>
 
@@ -348,12 +164,12 @@
         <div class="quiz-top">
           <div>
             <div class="badge" id="quizLessonBadge">L13</div>
-            <h2 id="quizTitle">Question 1 of 10</h2>
+            <h2 id="quizTitle">Question 1 of 12</h2>
           </div>
           <div class="progress"><div id="progressBar"></div></div>
         </div>
         <div class="question-box">
-          <div class="question" id="quizQuestion"></div>
+          <div class="question" id="quizQuestion">Loading...</div>
           <div id="quizAnswerArea"></div>
           <div class="actions">
             <button class="primary" id="checkAnswerBtn">Check Answer</button>
@@ -395,78 +211,12 @@
 
   <script>
     const lessons = [
-      {
-        title: 'Lesson 13: Shopping with Decimals',
-        keyIdeas: [
-          'Line up decimal points when adding and subtracting money.',
-          'Use dollars and cents carefully.',
-          'If buying whole items, round down at the end.'
-        ],
-        examples: [
-          { q: '$14.50 - ($4.35 + $5.25)', a: '$4.90', why: '$4.35 + $5.25 = $9.60, then $14.50 - $9.60 = $4.90' },
-          { q: '$40 ÷ $7.50', a: '5 pizzas', why: '40 ÷ 7.50 = 5.33..., so only 5 whole pizzas' }
-        ]
-      },
-      {
-        title: 'Lesson 14: Decimal Addition and Subtraction',
-        keyIdeas: [
-          '10 hundredths = 1 tenth.',
-          'Bundling means 10 hundredths become 1 tenth.',
-          'Unbundling means 1 tenth becomes 10 hundredths.'
-        ],
-        examples: [
-          { q: '0.08 + 0.13', a: '0.21', why: '8 hundredths + 13 hundredths = 21 hundredths' },
-          { q: '0.23 - 0.07', a: '0.16', why: '23 hundredths - 7 hundredths = 16 hundredths' }
-        ]
-      },
-      {
-        title: 'Lesson 17: Multiplying Decimals',
-        keyIdeas: [
-          'Multiply like whole numbers first.',
-          'Then count total decimal places.',
-          'Area models can break numbers into parts.'
-        ],
-        examples: [
-          { q: '2.5 × 1.4', a: '3.5', why: '25 × 14 = 350, then place 2 decimal digits total' },
-          { q: '0.54 × 3.8', a: '2.052', why: '54 × 38 = 2052, then place 3 decimal digits total' }
-        ]
-      },
-      {
-        title: 'Lesson 19: Division that Makes Decimals',
-        keyIdeas: [
-          'Whole number division can make decimal answers.',
-          'Remainders can become tenths.',
-          'Example: 86 ÷ 4 = 21.5'
-        ],
-        examples: [
-          { q: '86 ÷ 4', a: '21.5', why: '84 ÷ 4 = 21 with 2 left, and 2 ones = 20 tenths' },
-          { q: '109.2 ÷ 6', a: '18.2', why: '108 ÷ 6 = 18 and 1.2 ÷ 6 = 0.2' }
-        ]
-      },
-      {
-        title: 'Lesson 20: Dividing Decimals by Decimals',
-        keyIdeas: [
-          'Make the divisor a whole number.',
-          'Multiply both numbers by the same power of 10.',
-          'The quotient stays the same.'
-        ],
-        examples: [
-          { q: '13.25 ÷ 0.4', a: '33.125', why: '132.5 ÷ 4 = 33.125' },
-          { q: '61.12 ÷ 3.2', a: '19.1', why: '611.2 ÷ 32 = 19.1' }
-        ]
-      },
-      {
-        title: 'Lesson 21: Decimal Operations in Word Problems',
-        keyIdeas: [
-          'Read the story first.',
-          'Decide whether to add, subtract, multiply, or divide.',
-          'Check if your answer makes sense.'
-        ],
-        examples: [
-          { q: '12-meter ribbon cut into 9 pieces of 0.4 meter. How much left?', a: '8.4 meters', why: '9 × 0.4 = 3.6 and 12 - 3.6 = 8.4' },
-          { q: 'How many wreaths from 8.4 meters if each uses 0.6 meter?', a: '14 wreaths', why: '8.4 ÷ 0.6 = 14' }
-        ]
-      }
+      { title: 'Lesson 13: Shopping with Decimals', keyIdeas: ['Line up decimal points when adding and subtracting money.', 'Use dollars and cents carefully.', 'If buying whole items, round down at the end.'], examples: [{ q: '$14.50 - ($4.35 + $5.25)', a: '$4.90', why: '$4.35 + $5.25 = $9.60, then $14.50 - $9.60 = $4.90' }, { q: '$40 ÷ $7.50', a: '5 pizzas', why: '40 ÷ 7.50 = 5.33..., so only 5 whole pizzas' }] },
+      { title: 'Lesson 14: Decimal Addition and Subtraction', keyIdeas: ['10 hundredths = 1 tenth.', 'Bundling means 10 hundredths become 1 tenth.', 'Unbundling means 1 tenth becomes 10 hundredths.'], examples: [{ q: '0.08 + 0.13', a: '0.21', why: '8 hundredths + 13 hundredths = 21 hundredths' }, { q: '0.23 - 0.07', a: '0.16', why: '23 hundredths - 7 hundredths = 16 hundredths' }] },
+      { title: 'Lesson 17: Multiplying Decimals', keyIdeas: ['Multiply like whole numbers first.', 'Then count total decimal places.', 'Area models can break numbers into parts.'], examples: [{ q: '2.5 × 1.4', a: '3.5', why: '25 × 14 = 350, then place 2 decimal digits total' }, { q: '0.54 × 3.8', a: '2.052', why: '54 × 38 = 2052, then place 3 decimal digits total' }] },
+      { title: 'Lesson 19: Division that Makes Decimals', keyIdeas: ['Whole number division can make decimal answers.', 'Remainders can become tenths.', 'Example: 86 ÷ 4 = 21.5'], examples: [{ q: '86 ÷ 4', a: '21.5', why: '84 ÷ 4 = 21 with 2 left, and 2 ones = 20 tenths' }, { q: '109.2 ÷ 6', a: '18.2', why: '108 ÷ 6 = 18 and 1.2 ÷ 6 = 0.2' }] },
+      { title: 'Lesson 20: Dividing Decimals by Decimals', keyIdeas: ['Make the divisor a whole number.', 'Multiply both numbers by the same power of 10.', 'The quotient stays the same.'], examples: [{ q: '13.25 ÷ 0.4', a: '33.125', why: '132.5 ÷ 4 = 33.125' }, { q: '61.12 ÷ 3.2', a: '19.1', why: '611.2 ÷ 32 = 19.1' }] },
+      { title: 'Lesson 21: Decimal Operations in Word Problems', keyIdeas: ['Read the story first.', 'Decide whether to add, subtract, multiply, or divide.', 'Check if your answer makes sense.'], examples: [{ q: '12-meter ribbon cut into 9 pieces of 0.4 meter. How much left?', a: '8.4 meters', why: '9 × 0.4 = 3.6 and 12 - 3.6 = 8.4' }, { q: 'How many wreaths from 8.4 meters if each uses 0.6 meter?', a: '14 wreaths', why: '8.4 ÷ 0.6 = 14' }] }
     ];
 
     const cheatCards = [
@@ -481,185 +231,39 @@
       ['Explain Reasoning', 'Use sentence starters like: I lined up the decimals...']
     ];
 
+    let quiz = [];
+    let quizIndex = 0;
+    let score = 0;
+    let answered = 0;
+    let wrongQuestions = [];
+    let currentLesson = 0;
+    let showResult = false;
+
+    function money(n) { return '$' + Number(n).toFixed(2); }
+    function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function normalize(v) { return String(v).trim().replace(/\$/g, '').replace(/\s+/g, '').toLowerCase(); }
+
     function buildQuestionPool() {
       const pool = [];
-
-      function money(n) {
-        return '$' + Number(n).toFixed(2);
-      }
-
-      function addMoneyQuestion() {
-        const startOptions = [12.5, 14.5, 18.75, 20, 25, 30];
-        const spend1Options = [4.35, 5.25, 3.75, 6.4, 2.85, 1.85];
-        const spend2Options = [5.25, 1.85, 4.25, 2.49, 3.15, 5.5];
-        const start = startOptions[Math.floor(Math.random() * startOptions.length)];
-        const s1 = spend1Options[Math.floor(Math.random() * spend1Options.length)];
-        const s2 = spend2Options[Math.floor(Math.random() * spend2Options.length)];
-        const answer = (start - s1 - s2).toFixed(2);
-        return {
-          type:'input',
-          lesson:'L13',
-          question:`Mai has ${money(start)}. She spends ${money(s1)} and ${money(s2)}. How much is left?`,
-          answer,
-          explain:`First add the spending: ${money(s1)} + ${money(s2)} = ${money(s1 + s2)}. Then subtract from ${money(start)} to get ${money(Number(answer))}.`
-        };
-      }
-
-      function buyWholeItemsQuestion() {
-        const priceOptions = [7.5, 6.25, 3.25, 1.85, 0.99];
-        const budgetOptions = [10, 18, 25, 40];
-        const price = priceOptions[Math.floor(Math.random() * priceOptions.length)];
-        const budget = budgetOptions[Math.floor(Math.random() * budgetOptions.length)];
-        const exact = budget / price;
-        const answer = String(Math.floor(exact));
-        return {
-          type:'input',
-          lesson:'L13',
-          question:`An item costs ${money(price)}. You have ${money(budget)}. How many whole items can you buy?`,
-          answer,
-          explain:`${budget} ÷ ${price} = ${exact.toFixed(2)}..., but you can only buy whole items, so the answer is ${answer}.`
-        };
-      }
-
-      function addSubtractDecimalQuestion() {
-        const ops = [
-          { a: 0.08, b: 0.13, op: '+', ans: '0.21', why: '8 hundredths + 13 hundredths = 21 hundredths = 0.21' },
-          { a: 0.23, b: 0.07, op: '-', ans: '0.16', why: '23 hundredths - 7 hundredths = 16 hundredths' },
-          { a: 7.4, b: 0.0022, op: '-', ans: '7.3978', why: 'Write 7.4 as 7.4000, then subtract 0.0022.' },
-          { a: 3.572, b: 2.6014, op: '-', ans: '0.9706', why: 'Line up the decimals and subtract by place value.' },
-          { a: 1.0, b: 0.162, op: '-', ans: '0.838', why: 'Write 1 as 1.000 and subtract 0.162.' }
-        ];
-        const q = ops[Math.floor(Math.random() * ops.length)];
-        return {
-          type:'input',
-          lesson:'L14',
-          question:`Find the value: ${q.a} ${q.op} ${q.b}`,
-          answer:q.ans,
-          explain:q.why
-        };
-      }
-
-      function multiplyDecimalQuestion() {
-        const pairs = [
-          { a: 2.5, b: 1.4, ans: '3.5' },
-          { a: 0.54, b: 3.8, ans: '2.052' },
-          { a: 5.4, b: 2.4, ans: '12.96' },
-          { a: 1.67, b: 3.5, ans: '5.845' },
-          { a: 3.1, b: 1.5, ans: '4.65' }
-        ];
-        const q = pairs[Math.floor(Math.random() * pairs.length)];
-        return {
-          type:'input',
-          lesson:'L17',
-          question:`Find the product: ${q.a} × ${q.b}`,
-          answer:q.ans,
-          explain:`Multiply like whole numbers first, then place the decimal correctly. The product is ${q.ans}.`
-        };
-      }
-
-      function divisionQuestion() {
-        const pairs = [
-          { lesson:'L19', q: '86 ÷ 4', ans: '21.5', why: '84 ÷ 4 = 21 with 2 left. The 2 ones become 20 tenths, and 20 tenths ÷ 4 = 5 tenths.' },
-          { lesson:'L19', q: '109.2 ÷ 6', ans: '18.2', why: '108 ÷ 6 = 18 and 1.2 ÷ 6 = 0.2.' },
-          { lesson:'L20', q: '13.25 ÷ 0.4', ans: '33.125', why: 'Make the divisor whole: 132.5 ÷ 4 = 33.125.' },
-          { lesson:'L20', q: '61.12 ÷ 3.2', ans: '19.1', why: 'Multiply both numbers by 10: 611.2 ÷ 32 = 19.1.' },
-          { lesson:'L20', q: '24.2 ÷ 1.1', ans: '22', why: 'Multiply both numbers by 10: 242 ÷ 11 = 22.' }
-        ];
-        const q = pairs[Math.floor(Math.random() * pairs.length)];
-        return {
-          type:'input',
-          lesson:q.lesson,
-          question:`Find the quotient: ${q.q}`,
-          answer:q.ans,
-          explain:q.why
-        };
-      }
-
-      function wordProblemQuestion() {
-        const qs = [
-          {
-            lesson:'L21',
-            question:'A ribbon is 12 meters long. Diego cuts 9 pieces of 0.4 meter. How much ribbon is left?',
-            answer:'8.4',
-            explain:'9 × 0.4 = 3.6. Then 12 - 3.6 = 8.4.'
-          },
-          {
-            lesson:'L21',
-            question:'If each wreath uses 0.6 meter of ribbon, how many wreaths can be made from 8.4 meters?',
-            answer:'14',
-            explain:'8.4 ÷ 0.6 = 14.'
-          },
-          {
-            lesson:'L21',
-            question:'At a school, 460 students walk. Public transit is 20% of that number. How many students take public transit?',
-            answer:'92',
-            explain:'20% = 0.2, and 0.2 × 460 = 92.'
-          },
-          {
-            lesson:'L21',
-            question:'The school bus group is 110% of 460 walkers. How many students ride the school bus?',
-            answer:'506',
-            explain:'110% = 1.10, and 1.10 × 460 = 506.'
-          }
-        ];
-        return qs[Math.floor(Math.random() * qs.length)];
-      }
-
-      function geometryQuestion() {
-        const qs = [
-          {
-            type:'input',
-            lesson:'L11',
-            question:'Volume of a rectangular prism with length 24, width 15, and height 4/3',
-            answer:'480',
-            explain:'24 × 15 × 4/3 = 32 × 15 = 480.'
-          },
-          {
-            type:'input',
-            lesson:'L10',
-            question:'Area of a triangle with base 8 and height 5',
-            answer:'20',
-            explain:'1/2 × 8 × 5 = 20.'
-          },
-          {
-            type:'input',
-            lesson:'L10',
-            question:'Area of a right triangle with base 5/4 and height 6/5',
-            answer:'0.75',
-            explain:'1/2 × 5/4 × 6/5 = 3/4 = 0.75.'
-          }
-        ];
-        return qs[Math.floor(Math.random() * qs.length)];
-      }
-
-      pool.push(addMoneyQuestion());
-      pool.push(buyWholeItemsQuestion());
-      pool.push(addSubtractDecimalQuestion());
-      pool.push(addSubtractDecimalQuestion());
-      pool.push(multiplyDecimalQuestion());
-      pool.push(multiplyDecimalQuestion());
-      pool.push(divisionQuestion());
-      pool.push(divisionQuestion());
-      pool.push(wordProblemQuestion());
-      pool.push(geometryQuestion());
-      pool.push(wordProblemQuestion());
-      pool.push(geometryQuestion());
-
-      return pool.sort(() => Math.random() - 0.5);
-    }
-
-    let quiz = buildQuestionPool();
-
-    function normalize(v) {
-      return String(v).trim().replace(/\$/g, '').replace(/\s+/g, '').toLowerCase();
+      const start = randomItem([12.5, 14.5, 18.75, 20, 25]);
+      const s1 = randomItem([4.35, 5.25, 3.75, 6.4, 2.85]);
+      const s2 = randomItem([1.85, 2.49, 4.25, 5.5, 3.15]);
+      pool.push({ type:'input', lesson:'L13', question:`Mai has ${money(start)}. She spends ${money(s1)} and ${money(s2)}. How much is left?`, answer:(start - s1 - s2).toFixed(2), explain:`First add the spending: ${money(s1)} + ${money(s2)} = ${money(s1 + s2)}. Then subtract from ${money(start)}.` });
+      const itemPrice = randomItem([7.5, 6.25, 3.25, 1.85, 0.99]);
+      const budget = randomItem([10, 18, 25, 40]);
+      pool.push({ type:'input', lesson:'L13', question:`An item costs ${money(itemPrice)}. You have ${money(budget)}. How many whole items can you buy?`, answer:String(Math.floor(budget / itemPrice)), explain:`Divide ${budget} by ${itemPrice}, then use only whole items.` });
+      pool.push(randomItem([{ type:'input', lesson:'L14', question:'Find the value: 0.08 + 0.13', answer:'0.21', explain:'8 hundredths + 13 hundredths = 21 hundredths.' }, { type:'input', lesson:'L14', question:'Find the value: 0.23 - 0.07', answer:'0.16', explain:'23 hundredths - 7 hundredths = 16 hundredths.' }, { type:'input', lesson:'L14', question:'Find the value: 7.4 - 0.0022', answer:'7.3978', explain:'Write 7.4 as 7.4000, then subtract.' }, { type:'input', lesson:'L14', question:'Find the value: 1 - 0.162', answer:'0.838', explain:'Write 1 as 1.000, then subtract 0.162.' }]));
+      pool.push(randomItem([{ type:'input', lesson:'L17', question:'Find the product: 2.5 × 1.4', answer:'3.5', explain:'25 × 14 = 350, then place 2 decimal digits.' }, { type:'input', lesson:'L17', question:'Find the product: 0.54 × 3.8', answer:'2.052', explain:'54 × 38 = 2052, then place 3 decimal digits.' }, { type:'input', lesson:'L17', question:'Find the product: 5.4 × 2.4', answer:'12.96', explain:'54 × 24 = 1296, then place 2 decimal digits.' }, { type:'input', lesson:'L17', question:'Find the product: 1.67 × 3.5', answer:'5.845', explain:'167 × 35 = 5845, then place 3 decimal digits.' }]));
+      pool.push(randomItem([{ type:'input', lesson:'L19', question:'Find the quotient: 86 ÷ 4', answer:'21.5', explain:'84 ÷ 4 = 21, remainder 2, and 2 ones = 20 tenths.' }, { type:'input', lesson:'L19', question:'Find the quotient: 109.2 ÷ 6', answer:'18.2', explain:'108 ÷ 6 = 18 and 1.2 ÷ 6 = 0.2.' }, { type:'input', lesson:'L20', question:'Find the quotient: 13.25 ÷ 0.4', answer:'33.125', explain:'Make the divisor whole: 132.5 ÷ 4.' }, { type:'input', lesson:'L20', question:'Find the quotient: 61.12 ÷ 3.2', answer:'19.1', explain:'Multiply both numbers by 10: 611.2 ÷ 32.' }, { type:'input', lesson:'L20', question:'Find the quotient: 24.2 ÷ 1.1', answer:'22', explain:'Multiply both numbers by 10: 242 ÷ 11 = 22.' }]));
+      pool.push(randomItem([{ type:'input', lesson:'L21', question:'A ribbon is 12 meters long. Diego cuts 9 pieces of 0.4 meter. How much ribbon is left?', answer:'8.4', explain:'9 × 0.4 = 3.6. Then 12 - 3.6 = 8.4.' }, { type:'input', lesson:'L21', question:'If each wreath uses 0.6 meter of ribbon, how many wreaths can be made from 8.4 meters?', answer:'14', explain:'8.4 ÷ 0.6 = 14.' }, { type:'input', lesson:'L21', question:'At a school, 460 students walk. Public transit is 20% of that number. How many students take public transit?', answer:'92', explain:'20% = 0.2, and 0.2 × 460 = 92.' }, { type:'input', lesson:'L21', question:'The school bus group is 110% of 460 walkers. How many students ride the school bus?', answer:'506', explain:'110% = 1.10, and 1.10 × 460 = 506.' }]));
+      pool.push(randomItem([{ type:'input', lesson:'L11', question:'Volume of a rectangular prism with length 24, width 15, and height 4/3', answer:'480', explain:'24 × 15 × 4/3 = 32 × 15 = 480.' }, { type:'input', lesson:'L10', question:'Area of a triangle with base 8 and height 5', answer:'20', explain:'1/2 × 8 × 5 = 20.' }, { type:'input', lesson:'L10', question:'Area of a right triangle with base 5/4 and height 6/5', answer:'0.75', explain:'1/2 × 5/4 × 6/5 = 3/4 = 0.75.' }]));
+      while (pool.length < 12) pool.push(randomItem(pool));
+      return pool.sort(() => Math.random() - 0.5).slice(0, 12);
     }
 
     function setTab(tab) {
-      currentTab = tab;
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
-      ['home','review','quiz','cheatsheet','results'].forEach(id => {
-        document.getElementById(id).classList.toggle('hidden', id !== tab);
-      });
+      ['home','review','quiz','cheatsheet','results'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tab));
       if (tab === 'results') renderResults();
     }
 
@@ -677,21 +281,7 @@
 
     function renderLessonPanel() {
       const lesson = lessons[currentLesson];
-      const panel = document.getElementById('lessonPanel');
-      panel.innerHTML = `
-        <div class="badge">Review Mode</div>
-        <h2>${lesson.title}</h2>
-        <div class="examples">
-          <div class="example">
-            <h3>Key Ideas</h3>
-            ${lesson.keyIdeas.map(x => `<p>• ${x}</p>`).join('')}
-          </div>
-          <div class="example">
-            <h3>Worked Examples</h3>
-            ${lesson.examples.map(ex => `<div style="margin-bottom:14px"><strong>Q:</strong> ${ex.q}<br><strong>A:</strong> ${ex.a}<br><span style="color:#64748b">Why: ${ex.why}</span></div>`).join('')}
-          </div>
-        </div>
-      `;
+      document.getElementById('lessonPanel').innerHTML = `<div class="badge">Review Mode</div><h2>${lesson.title}</h2><div class="examples"><div class="example"><h3>Key Ideas</h3>${lesson.keyIdeas.map(x => '<p>• ' + x + '</p>').join('')}</div><div class="example"><h3>Worked Examples</h3>${lesson.examples.map(ex => '<div style="margin-bottom:14px"><strong>Q:</strong> ' + ex.q + '<br><strong>A:</strong> ' + ex.a + '<br><span style="color:#64748b">Why: ' + ex.why + '</span></div>').join('')}</div></div>`;
     }
 
     function renderCheatCards() {
@@ -700,7 +290,7 @@
       cheatCards.forEach(([title, body]) => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h3>${title}</h3><p>${body}</p>`;
+        card.innerHTML = '<h3>' + title + '</h3><p>' + body + '</p>';
         grid.appendChild(card);
       });
     }
@@ -708,60 +298,28 @@
     function renderQuiz() {
       const q = quiz[quizIndex];
       document.getElementById('quizLessonBadge').textContent = q.lesson;
-      document.getElementById('quizTitle').textContent = `Question ${quizIndex + 1} of ${quiz.length}`;
+      document.getElementById('quizTitle').textContent = 'Question ' + (quizIndex + 1) + ' of ' + quiz.length;
       document.getElementById('quizQuestion').textContent = q.question;
-      document.getElementById('progressBar').style.width = `${(quizIndex / quiz.length) * 100}%`;
-      const area = document.getElementById('quizAnswerArea');
+      document.getElementById('progressBar').style.width = ((quizIndex / quiz.length) * 100) + '%';
+      document.getElementById('quizAnswerArea').innerHTML = '<input class="input" id="textInput" placeholder="Type your answer" />';
       const feedback = document.getElementById('feedbackBox');
       feedback.className = 'feedback';
       feedback.innerHTML = '';
       showResult = false;
-      selected = '';
-      textAnswer = '';
-
-      if (q.type === 'mc') {
-        const wrap = document.createElement('div');
-        wrap.className = 'choices';
-        q.options.forEach(option => {
-          const btn = document.createElement('button');
-          btn.className = 'choice';
-          btn.textContent = option;
-          btn.onclick = () => {
-            if (showResult) return;
-            selected = option;
-            document.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
-            btn.classList.add('selected');
-          };
-          wrap.appendChild(btn);
-        });
-        area.innerHTML = '';
-        area.appendChild(wrap);
-      } else {
-        area.innerHTML = `<input class="input" id="textInput" placeholder="Type your answer" />`;
-      }
     }
 
     function checkAnswer() {
       if (showResult) return;
       const q = quiz[quizIndex];
-      const user = q.type === 'mc' ? selected : document.getElementById('textInput').value;
+      const user = document.getElementById('textInput').value;
       if (!user) return;
       const correct = normalize(user) === normalize(q.answer);
-      showResult = true;
       answered += 1;
-      if (correct) score += 1;
-      else wrongQuestions.push(q);
-
+      if (correct) score += 1; else wrongQuestions.push(q);
       const feedback = document.getElementById('feedbackBox');
       feedback.className = 'feedback show ' + (correct ? 'good' : 'bad');
-      feedback.innerHTML = `<strong>${correct ? '✅ Correct!' : '❌ Not quite'}</strong><br>Correct answer: <strong>${q.answer}</strong><br>${q.explain}`;
-
-      if (q.type === 'mc') {
-        document.querySelectorAll('.choice').forEach(btn => {
-          if (btn.textContent === q.answer) btn.classList.add('correct');
-          if (btn.textContent === user && user !== q.answer) btn.classList.add('wrong');
-        });
-      }
+      feedback.innerHTML = '<strong>' + (correct ? '✅ Correct!' : '❌ Not quite') + '</strong><br>Correct answer: <strong>' + q.answer + '</strong><br>' + q.explain;
+      showResult = true;
       updateStats();
     }
 
@@ -787,23 +345,22 @@
     }
 
     function updateStats() {
-      document.getElementById('statScore').textContent = `${score}/${answered}`;
-      const accuracy = answered ? Math.round(score / answered * 100) : 0;
-      document.getElementById('statAccuracy').textContent = `${accuracy}%`;
+      document.getElementById('statScore').textContent = score + '/' + answered;
+      document.getElementById('statAccuracy').textContent = (answered ? Math.round(score / answered * 100) : 0) + '%';
     }
 
     function renderResults() {
       const accuracy = answered ? Math.round(score / answered * 100) : 0;
       document.getElementById('resultCorrect').textContent = score;
       document.getElementById('resultMissed').textContent = answered - score;
-      document.getElementById('resultAccuracy').textContent = `${accuracy}%`;
+      document.getElementById('resultAccuracy').textContent = accuracy + '%';
       const review = document.getElementById('reviewMissed');
       review.innerHTML = '<h3 style="margin-top:22px">Questions to Review</h3>';
       if (!wrongQuestions.length) {
         review.innerHTML += '<div class="review-item" style="background:#ecfdf5;border-color:#a7f3d0">Amazing — no missed questions in this run! 🎉</div>';
       } else {
         wrongQuestions.forEach(q => {
-          review.innerHTML += `<div class="review-item"><strong>${q.question}</strong><br><div style="margin-top:8px">Correct answer: <strong>${q.answer}</strong></div><div style="margin-top:8px;color:#7c2d12">${q.explain}</div></div>`;
+          review.innerHTML += '<div class="review-item"><strong>' + q.question + '</strong><br><div style="margin-top:8px">Correct answer: <strong>' + q.answer + '</strong></div><div style="margin-top:8px;color:#7c2d12">' + q.explain + '</div></div>';
         });
       }
     }
@@ -814,6 +371,7 @@
     document.getElementById('nextQuestionBtn').onclick = nextQuestion;
     document.getElementById('restartQuizBtn').onclick = restartQuiz;
 
+    quiz = buildQuestionPool();
     renderLessonButtons();
     renderLessonPanel();
     renderCheatCards();
